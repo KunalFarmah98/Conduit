@@ -1,13 +1,17 @@
 package com.apps.kunalfarmah.conduit
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.apps.kunalfarmah.conduit.Fragments.Main.Article.EditArticleFragment
+import com.apps.kunalfarmah.conduit.Fragments.Main.Auth.LoginFragment
+import com.apps.kunalfarmah.conduit.Fragments.Main.Auth.RegisterFragment
+import com.apps.kunalfarmah.conduit.Fragments.Main.HomeFragment
+import com.apps.kunalfarmah.conduit.Fragments.Main.User.SetingsFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -18,10 +22,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
 
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
@@ -30,6 +30,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        // openning home fragment when app starts
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.framelayout_main_container, HomeFragment.newInstance())
+            .commit()
     }
 
     override fun onBackPressed() {
@@ -59,24 +64,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-//            R.id.nav_camera -> {
-//                // Handle the camera action
-//            }
-//            R.id.nav_gallery -> {
-//
-//            }
-//            R.id.nav_slideshow -> {
-//
-//            }
-//            R.id.nav_manage -> {
-//
-//            }
-//            R.id.nav_share -> {
-//
-//            }
-//            R.id.nav_send -> {
 
-          //  }
+            R.id.menu_item_home-> HomeFragment.newInstance()
+            R.id.menu_item_sign_in -> LoginFragment.newInstance()
+            R.id.menu_item_sign_up -> RegisterFragment.newInstance()
+
+            R.id.menu_item_new_article -> EditArticleFragment.newInstance()
+            R.id.menu_item_settings-> SetingsFragment.newInstance()
+
+            else->HomeFragment.newInstance()  // opening home article in default case
+
+        }.let {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.framelayout_main_container, it)
+                .commit()
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)

@@ -19,11 +19,11 @@
     <item android:title="Communicate">
         <menu>
             <item
-                    android:id="@+id/new_article"
+                    android:id="@+id/menu_item_new_article"
                     android:icon="@drawable/ic_new_article"
                     android:title="New Article"/>
             <item
-                    android:id="@+id/settings"
+                    android:id="@+id/menu_item_settings"
                     android:icon="@drawable/ic_settings_black_24dp"
                     android:title="Settings"/>
         </menu>
