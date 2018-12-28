@@ -74,6 +74,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             else->HomeFragment.newInstance()  // opening home article in default case
 
+            // the let block takes the instances returned by the when clauses and does the work with them like
+            // fragment transactions, new activities,data updates, etc
         }.let {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.framelayout_main_container, it)
