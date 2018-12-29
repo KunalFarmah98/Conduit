@@ -21,8 +21,8 @@ data class ProfileResponse(
 )
 
 data class UserResponse(
-    @SerializedName("user")
-    val user: User
+    @SerializedName("userInfo")
+    val user: UserInfo
 )
 
 data class CommentResponse(
@@ -35,4 +35,7 @@ data class CommentsResponse(
     @SerializedName("comments")
     val comments: List<Comments>?
 )
+
+data class TagsArrayResponse(@SerializedName("tags")
+                             val tags: List<String>?)
 
